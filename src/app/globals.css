@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary:   #009E9E;
+  --brand-secondary: #006B6B;
+  --brand-dark:      #002B35;
+  --brand-gray:      #A0A0A0;
+  --brand-light:     #DCDCDC;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #001820; }
+::-webkit-scrollbar-thumb { background: #006B6B; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #009E9E; }
+
+/* ── Score gauge animations ─────────────────────────── */
+@keyframes fillArc {
+  from { stroke-dashoffset: 283; }
+}
+.gauge-arc { animation: fillArc 1.2s ease-out forwards; }
+
+/* ── Scan progress animation ──────────────────────── */
+@keyframes scanLine {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.scan-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,158,158,0.3), transparent);
+  animation: scanLine 1.5s ease-in-out infinite;
+}
+
+/* ── Severity badges ──────────────────────────────── */
+.badge-critical { @apply bg-red-500/20 text-red-400 border border-red-500/30; }
+.badge-warning  { @apply bg-amber-500/20 text-amber-400 border border-amber-500/30; }
+.badge-info     { @apply bg-blue-500/20 text-blue-400 border border-blue-500/30; }
+.badge-pass     { @apply bg-teal-500/20 text-teal-400 border border-teal-500/30; }
+
+/* ── Card hover glow ──────────────────────────────── */
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(0,158,158,0.4), 0 4px 20px rgba(0,158,158,0.15);
+}
+
+/* ── Gradient text ────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #009E9E, #80d9d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Copilot chat ─────────────────────────────────── */
+.prose-dark { color: #DCDCDC; }
+.prose-dark strong { color: #009E9E; }
+.prose-dark code { background: rgba(0,158,158,0.15); color: #80d9d9; padding: 2px 6px; border-radius: 4px; font-size: 0.875em; }
+
+/* ── Recharts tooltips ────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #002B35 !important;
+  border: 1px solid rgba(0,158,158,0.3) !important;
+  border-radius: 8px !important;
+  color: #DCDCDC !important;
+}
