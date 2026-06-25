@@ -20,7 +20,7 @@ export default function SignupPage() {
     setLoading(true)
     setError('')
     const supabase = createClient()
-    const { error: err } = await supabase.auth.signUp({
+    const { data, error: err } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -29,6 +29,7 @@ export default function SignupPage() {
       },
     })
     if (err) { setError(err.message); setLoading(false) }
+    else if (data.session) { router.push('/dashboard') }
     else setDone(true)
   }
 
